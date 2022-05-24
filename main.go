@@ -82,7 +82,7 @@ func main() {
 		errLog.Fatalf("Could not read from %s", *txtFile)
 	}
 
-	fmt.Println("Logging into", homeserver, "as", username)
+	infoLog.Println("Logging into", homeserver, "as", username)
 	client, err := mautrix.NewClient(homeserver, "", "")
 	if err != nil {
 		panic(err)
@@ -96,7 +96,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("Login successful")
+	infoLog.Println("Login successful")
 
 	var room id.RoomID
 	if strings.HasPrefix(roomID, "#") {
@@ -116,7 +116,6 @@ func main() {
 	ignore.Register(syncer)
 	syncer.OnEventType(event.StateMember, func(source mautrix.EventSource, evt *event.Event) {
 		if evt.Content.Raw["membership"] == "join" && evt.RoomID == room {
-			infoLog.Printf("%s joined the room!", evt.Sender)
 			rsp, err := client.CreateRoom(&mautrix.ReqCreateRoom{
 				Preset:   "private_chat",
 				Invite:   []id.UserID{evt.Sender},
