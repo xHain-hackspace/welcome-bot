@@ -7,13 +7,12 @@ If a new user joins the bot will send a private (direct-)message to the newly jo
 
 You have to set a couple of Environment Variables to make the bot work:
 
-| Variable                 | Description                                                       |
-| ------------------------ | ----------------------------------------------------------------- |
-| `WELCOME_BOT_HOMESERVER` | URL in the form of `matrix.example.org`                           |
-| `WELCOME_BOT_USERNAME`   | Username of the bot user                                          |
-| `WELCOME_BOT_PASSWORD`   | Password of the bot user                                          |
-| `WELCOME_BOT_SPACE_ID`   | ID of the Space this bot should manage, either as roomID or alias |
-| `WELCOME_BOT_ROOM_ID`    | ID of the Room that will be used to send commands to the bot      |
+| Variable                 | Description                                                  |
+| ------------------------ | ------------------------------------------------------------ |
+| `WELCOME_BOT_HOMESERVER` | URL in the form of `matrix.example.org`                      |
+| `WELCOME_BOT_USERNAME`   | Username of the bot user                                     |
+| `WELCOME_BOT_PASSWORD`   | Password of the bot user                                     |
+| `WELCOME_BOT_ROOM_ID`    | ID of the Room that will be used to send commands to the bot |
 
 ### Docker
 
