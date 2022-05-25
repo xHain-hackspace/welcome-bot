@@ -108,7 +108,7 @@ func main() {
 			if err != nil {
 				errLog.Fatalf("Could not create instant messaging room: %s", err)
 			}
-			client.SendMessageEvent(rsp.RoomID, event.EventMessage, struct {
+			_, err = client.SendMessageEvent(rsp.RoomID, event.EventMessage, struct {
 				Body          string `json:"body"`
 				MsgType       string `json:"msgtype"`
 				Format        string `json:"format"`
@@ -119,6 +119,9 @@ func main() {
 				Format:        "org.matrix.custom.html",
 				FormattedBody: string(htmlMsg),
 			})
+			if err != nil {
+				errLog.Fatalf("Could not send message: %s", err)
+			}
 		}
 	})
 
