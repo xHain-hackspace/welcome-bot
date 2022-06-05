@@ -9,9 +9,10 @@ COPY go.mod ./
 COPY go.sum ./
 RUN go mod download
 
-COPY *.go ./
+COPY cmd ./cmd/
+COPY internal ./internal
 
-RUN go build -o /welcome-bot
+RUN go build -o /welcome-bot ./cmd/welcome-bot
 
 ##
 ## Deploy
