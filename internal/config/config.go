@@ -10,7 +10,7 @@ import (
 type Config struct {
 	Homeserver       string   `yaml:"homeserver"`
 	Rooms            []string `yaml:"rooms"`
-	RedirectMessages bool     `yam:"redirectMessages"`
+	RedirectMessages bool     `yaml:"redirectMessages"`
 	RedirectRoom     string   `yaml:"redirectRoom"`
 	HtmlMsgPath      string   `yaml:"htmlMsgPath"`
 	TxtMsgPath       string   `yaml:"txtMsgPath"`

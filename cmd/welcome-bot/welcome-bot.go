@@ -178,6 +178,7 @@ func main() {
 	})
 
 	if conf.RedirectMessages {
+		infoLog.Println("Redirecting messages to: " + redirectRoom.String())
 		syncer.OnEventType(event.EventMessage, func(source mautrix.EventSource, evt *event.Event) {
 			// filter messages from redirect room
 			if evt.RoomID == redirectRoom {
