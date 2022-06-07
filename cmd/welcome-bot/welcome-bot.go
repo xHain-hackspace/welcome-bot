@@ -5,19 +5,13 @@ import (
 	"log"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/xHain-hackspace/welcome-bot/internal/config"
 	"github.com/xHain-hackspace/welcome-bot/internal/util"
 	"maunium.net/go/mautrix"
 	"maunium.net/go/mautrix/event"
 	"maunium.net/go/mautrix/id"
-)
-
-const (
-	envHomeserver = "WELCOME_BOT_HOMESERVER"
-	envUsername   = "WELCOME_BOT_USERNAME"
-	envPassword   = "WELCOME_BOT_PASSWORD"
-	envRoomID     = "WELCOME_BOT_ROOM_ID"
 )
 
 const flags = log.Ldate | log.Ltime | log.Lmsgprefix
@@ -78,19 +72,24 @@ func main() {
 	if err != nil {
 		errLog.Fatal(err)
 	}
-	_, err = client.Login(&mautrix.ReqLogin{
-		Type:             "m.login.password",
-		Identifier:       mautrix.UserIdentifier{Type: mautrix.IdentifierTypeUser, User: conf.Username},
-		Password:         conf.Password,
-		StoreCredentials: true,
-	})
+	for {
+		_, err = client.Login(&mautrix.ReqLogin{
+			Type:             "m.login.password",
+			Identifier:       mautrix.UserIdentifier{Type: mautrix.IdentifierTypeUser, User: conf.Username},
+			Password:         conf.Password,
+			StoreCredentials: true,
+		})
+		if err != nil {
+			errLog.Println(err)
+			time.Sleep(30 * time.Second)
+		} else {
+			break
+		}
+	}
 	defer func() {
 		_, err := client.Logout()
 		errLog.Println(err)
 	}()
-	if err != nil {
-		errLog.Fatal(err)
-	}
 	infoLog.Println("Login successful")
 
 	// validate roomIDs
